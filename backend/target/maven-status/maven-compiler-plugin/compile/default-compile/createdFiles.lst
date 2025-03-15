@@ -1,0 +1,5 @@
+com/breakabletoy/Application.class
+com/breakabletoy/repository/ProductRepository.class
+com/breakabletoy/model/Product.class
+com/breakabletoy/controller/ProductController.class
+com/breakabletoy/service/ProductService.class
