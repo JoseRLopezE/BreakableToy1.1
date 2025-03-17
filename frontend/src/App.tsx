@@ -10,8 +10,6 @@ import { INITIAL_CATEGORIES, INITIAL_PRODUCTS } from './utils/initialData';
 
 const ITEMS_PER_PAGE = 10;
 
-
-
 function App() {
   const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
   const [categories, setCategories] = useState<string[]>(INITIAL_CATEGORIES);
@@ -103,13 +101,25 @@ function App() {
     setEditingProduct(undefined);
   };
 
-  const handleSelectProduct = (id: string) => {
+  const handleSelectProduct = async (id: string, checked: boolean) => {
+    const updatedProducts = products.map((product) => {
+      if (product.id === id) {
+        return { ...product, stock: checked ? 0 : 10 };
+      }
+      return product;
+    });
+    setProducts(updatedProducts);
     setSelectedProducts((prev) => 
-      prev.includes(id) ? prev.filter(productId => productId !== id) : [...prev, id]
+      checked ? [...prev, id] : prev.filter(productId => productId !== id)
     );
   };
 
   const handleSelectAll = (checked: boolean) => {
+    const updatedProducts = products.map((product) => ({
+      ...product,
+      stock: checked ? 0 : 10,
+    }));
+    setProducts(updatedProducts);
     setSelectedProducts(checked ? filteredProducts.map(p => p.id) : []);
   };
 
@@ -240,7 +250,7 @@ function App() {
                       <input
                         type="checkbox"
                         checked={selectedProducts.includes(product.id)}
-                        onChange={() => handleSelectProduct(product.id)}
+                        onChange={(e) => handleSelectProduct(product.id, e.target.checked)}
                         className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
                       />
                     </td>

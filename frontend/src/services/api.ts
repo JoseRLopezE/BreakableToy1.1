@@ -21,3 +21,11 @@ export const updateProduct = async (id: string, product: Partial<Product>): Prom
 export const deleteProduct = async (id: string): Promise<void> => {
   await axios.delete(`${API_URL}/${id}`);
 };
+
+export const markProductOutOfStock = async (id: string): Promise<void> => {
+  await axios.post(`${API_URL}/products/${id}/outofstock`);
+};
+
+export const markProductInStock = async (id: string): Promise<void> => {
+  await axios.put(`${API_URL}/products/${id}/instock`);
+};
