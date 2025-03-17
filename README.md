@@ -11,26 +11,40 @@ BreakableToy
 │   │   └── main
 │   │       ├── java
 │   │       │   └── com
-│   │       │           └── breakabletoy
-│   │       │               └── Application.java
+│   │       │       └── breakabletoy
+│   │       │           ├── Application.java
+│   │       │           ├── controller
+│   │       │           │   └── ProductController.java
+│   │       │           ├── model
+│   │       │           │   └── Product.java
+│   │       │           ├── repository
+│   │       │           │   └── ProductRepository.java
+│   │       │           └── service
+│   │       │               └── ProductService.java
+│   │       │
 │   │       └── resources
 │   │           ├── application.properties
 │   │           └── static
+│   │               ├── assets
 │   │               └── index.html
 │   ├── pom.xml
 │   └── README.md
 ├── frontend
 │   ├── src
 │   │   ├── components
-│   │   │   └── SearchBar.tsx
+│   │   │   ├── SearchBar.tsx
+│   │   │   ├── ProductModal.tsx
+│   │   │   └── Metrics.tsx
 │   │   ├── App.tsx
 │   │   ├── index.tsx
+│   │   ├── types.ts
 │   │   └── styles.css
 │   ├── public
 │   │   └── index.html
 │   ├── package.json
 │   └── README.md
-└── .gitignore
+├── .gitignore
+└── README.md
 ```
 
 ## Backend Setup
