@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { ArrowUpDown, Edit, Trash } from 'lucide-react';
 import { Product, SortConfig, Availability, Metrics as MetricsType } from './types';
 import { SearchBar } from './components/SearchBar';
-import { ProductModal } from './components/ProductModal';
 import { Metrics } from './components/Metrics';
-import { getExpirationColor, getStockColor } from './utils/dateUtils';
+import { getExpirationColor, getStockColor, formatDate } from './utils/dateUtils';
+import { ProductModal } from './components/ProductModal';
 
 const ITEMS_PER_PAGE = 10;
 const MOCK_CATEGORIES = ['Electronics', 'Food', 'Clothing', 'Books', 'Tools'];
@@ -32,7 +32,6 @@ const INITIAL_PRODUCTS: Product[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
-
   {
     id: '3',
     name: 'Watermelon',
@@ -44,7 +43,6 @@ const INITIAL_PRODUCTS: Product[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
-
   {
     id: '4',
     name: 'Milk',
@@ -56,6 +54,9 @@ const INITIAL_PRODUCTS: Product[] = [
     createdAt: new Date(),
     updatedAt: new Date(),
   },
+
+
+  
 ];
 
 function App() {
@@ -65,8 +66,8 @@ function App() {
   const [availability, setAvailability] = useState<Availability>('all');
   const [sortConfig, setSortConfig] = useState<SortConfig>({ key: 'name', direction: 'asc' });
   const [currentPage, setCurrentPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | undefined>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const [metrics, setMetrics] = useState<MetricsType>({
     overall: { totalProducts: 0, totalValue: 0, averagePrice: 0 }
@@ -275,7 +276,7 @@ function App() {
                 {paginatedProducts.map((product) => (
                   <tr 
                     key={product.id} 
-                    className={`border-b hover:bg-gray-50 ${getExpirationColor(product.expirationDate)}`}
+                    className={`border-b hover:bg-gray-50`}
                   >
                     <td className="px-4 py-2 text-center">
                       <input
@@ -294,8 +295,8 @@ function App() {
                     <td className={`px-4 py-2 ${product.stock === 0 ? 'line-through' : ''}`}>
                       ${product.price.toFixed(2)}
                     </td>
-                    <td className={`px-4 py-2 ${product.stock === 0 ? 'line-through' : ''}`}>
-                      {product.expirationDate || 'N/A'}
+                    <td className={`px-4 py-2 ${getExpirationColor(product.expirationDate)}`}>
+                      {formatDate(product.expirationDate || '') || 'N/A'}
                     </td>
                     <td className={`px-4 py-2 ${getStockColor(product.stock)}`}>
                       {product.stock}

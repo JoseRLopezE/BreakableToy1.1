@@ -11,7 +11,16 @@ export function getExpirationColor(expirationDate: string | undefined): string {
   }
   
   export function getStockColor(stock: number): string {
-    if (stock < 5) return 'text-red-600';
-    if (stock <= 10) return 'text-orange-600';
+    if (stock < 5) return 'bg-red-200';
+    if (stock <= 10) return 'bg-orange-200';
     return '';
   }
+
+  export const formatDate = (dateString: string): string => {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+    return `${month}/${day}/${year}`;
+  };
