@@ -1,17 +1,19 @@
 package com.breakabletoy.model;
 
 public class Product {
-    private Long id;
+    private String id;
     private String name;
-    private int quantity;
+    private String category;
     private double price;
+    private int stock;
+    private String expirationDate;
 
-    // Getters and setters
-    public Long getId() {
+    // Getters and Setters
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -23,12 +25,12 @@ public class Product {
         this.name = name;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getCategory() {
+        return category;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public double getPrice() {
@@ -37,5 +39,21 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
     }
 }

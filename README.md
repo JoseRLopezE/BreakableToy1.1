@@ -11,47 +11,60 @@ BreakableToy
 │   │   └── main
 │   │       ├── java
 │   │       │   └── com
-│   │       │       └── inventorysystem
-│   │       │           └── application
-│   │       │               └── Application.java
+│   │       │       └── breakabletoy
+│   │       │           ├── Application.java
+│   │       │           ├── controller
+│   │       │           │   └── ProductController.java
+│   │       │           ├── model
+│   │       │           │   └── Product.java
+│   │       │           ├── repository
+│   │       │           │   └── ProductRepository.java
+│   │       │           └── service
+│   │       │               └── ProductService.java
+│   │       │
 │   │       └── resources
 │   │           ├── application.properties
 │   │           └── static
+│   │               ├── assets
 │   │               └── index.html
 │   ├── pom.xml
 │   └── README.md
 ├── frontend
 │   ├── src
 │   │   ├── components
-│   │   │   └── CreateProductForm.js
-│   │   ├── App.js
-│   │   ├── index.js
+│   │   │   ├── SearchBar.tsx
+│   │   │   ├── ProductModal.tsx
+│   │   │   └── Metrics.tsx
+│   │   ├── App.tsx
+│   │   ├── index.tsx
+│   │   ├── types.ts
 │   │   └── styles.css
 │   ├── public
 │   │   └── index.html
 │   ├── package.json
 │   └── README.md
-└── .gitignore
+├── .gitignore
+└── README.md
 ```
 
 ## Backend Setup
-1. Navigate to the `BackEnd` directory.
+1. Navigate to the `backend` directory.
 2. Ensure you have Java and Maven installed.
 3. Run the following command to start the Spring Boot application:
-   ```
+   ```sh
    mvn spring-boot:run
    ```
 4. The backend will be available at `http://localhost:8080`.
 
 ## Frontend Setup
-1. Navigate to the `FrontEnd` directory.
+1. Navigate to the `frontend` directory.
 2. Ensure you have Node.js and npm installed.
 3. Install the dependencies by running:
-   ```
+   ```sh
    npm install
    ```
 4. Start the React application with:
-   ```
+   ```sh
    npm start
    ```
 5. The frontend will be available at `http://localhost:3000`.

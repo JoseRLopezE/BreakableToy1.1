@@ -3,34 +3,26 @@ package com.breakabletoy.repository;
 import com.breakabletoy.model.Product;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.*;
 
 @Repository
 public class ProductRepository {
-    private final List<Product> products = new ArrayList<>();
-    private final AtomicLong counter = new AtomicLong();
+    private final Map<String, Product> productMap = new HashMap<>();
 
     public List<Product> findAll() {
-        return new ArrayList<>(products);
+        return new ArrayList<>(productMap.values());
     }
 
-    public Optional<Product> findById(Long id) {
-        return products.stream().filter(product -> product.getId().equals(id)).findFirst();
+    public Optional<Product> findById(String id) {
+        return Optional.ofNullable(productMap.get(id));
     }
 
     public Product save(Product product) {
-        if (product.getId() == null) {
-            product.setId(counter.incrementAndGet());
-        }
-        products.removeIf(p -> p.getId().equals(product.getId()));
-        products.add(product);
+        productMap.put(product.getId(), product);
         return product;
     }
 
-    public void deleteById(Long id) {
-        products.removeIf(product -> product.getId().equals(id));
+    public void deleteById(String id) {
+        productMap.remove(id);
     }
 }
