@@ -35,6 +35,8 @@ BreakableToy
 │   │   │   ├── SearchBar.tsx
 │   │   │   ├── ProductModal.tsx
 │   │   │   └── Metrics.tsx
+│   │   ├── services
+│   │   │   └── api.ts
 │   │   ├── App.tsx
 │   │   ├── index.tsx
 │   │   ├── types.ts
@@ -54,7 +56,7 @@ BreakableToy
    ```sh
    mvn spring-boot:run
    ```
-4. The backend will be available at `http://localhost:8080`.
+4. The backend will be available at `http://localhost:9090`.
 
 ## Frontend Setup
 1. Navigate to the `frontend` directory.
@@ -67,7 +69,7 @@ BreakableToy
    ```sh
    npm start
    ```
-5. The frontend will be available at `http://localhost:3000`.
+5. The frontend will be available at `http://localhost:8080`.
 
 ## Contributing
 Feel free to contribute to the project by submitting issues or pull requests. Please ensure to follow the coding standards and guidelines.
