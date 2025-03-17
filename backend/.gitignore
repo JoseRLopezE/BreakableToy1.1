@@ -1,0 +1,10 @@
+# Backend specific ignores
+target/
+*.jar
+*.war
+*.iml
+.mvn/
+.settings/
+.classpath
+.project
+.springBeans
