@@ -1,60 +1,59 @@
 package com.breakabletoy.model;
 
 public class Product {
-    private Long id;
+    private String id;
     private String name;
     private String category;
     private double price;
-    private String expirationDate;
     private int stock;
+    private String expirationDate;
 
-    // Getters
-    public Long getId() {
+    // Getters and Setters
+    public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public String getExpirationDate() {
-        return expirationDate;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    // Setters
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCategory() {
+        return category;
     }
 
     public void setCategory(String category) {
         this.category = category;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }
 
-    public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
+    public int getStock() {
+        return stock;
     }
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
     }
 }

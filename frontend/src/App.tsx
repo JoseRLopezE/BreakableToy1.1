@@ -5,62 +5,16 @@ import { SearchBar } from './components/SearchBar';
 import { Metrics } from './components/Metrics';
 import { getExpirationColor, getStockColor, formatDate } from './utils/dateUtils';
 import { ProductModal } from './components/ProductModal';
+import { getProducts, createProduct, updateProduct, deleteProduct } from './services/api';
+import { INITIAL_CATEGORIES, INITIAL_PRODUCTS } from './utils/initialData';
 
 const ITEMS_PER_PAGE = 10;
-const MOCK_CATEGORIES = ['Electronics', 'Food', 'Clothing', 'Books', 'Tools'];
-
-const INITIAL_PRODUCTS: Product[] = [
-  {
-    id: '1',
-    name: 'Laptop',
-    category: 'Electronics',
-    price: 999.99,
-    expirationDate: '2025-12-31',
-    stock: 15,
-    isAvailable: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '2',
-    name: 'LG 3',
-    category: 'Electronics',
-    price: 200.99,
-    expirationDate: '',
-    stock: 15,
-    isAvailable: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '3',
-    name: 'Watermelon',
-    category: 'Food',
-    price: 1.2,
-    expirationDate: '2025-3-20',
-    stock: 50,
-    isAvailable: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '4',
-    name: 'Milk',
-    category: 'Food',
-    price: 1.5,
-    expirationDate: '2025-12-31',
-    stock: 15,
-    isAvailable: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
 
 
-  
-];
 
 function App() {
   const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
+  const [categories, setCategories] = useState<string[]>(INITIAL_CATEGORIES);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [availability, setAvailability] = useState<Availability>('all');
@@ -74,13 +28,22 @@ function App() {
   });
 
   useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
     calculateMetrics();
   }, [products]);
+
+  const fetchProducts = async () => {
+    const data = await getProducts();
+    setProducts(data);
+  };
 
   const calculateMetrics = () => {
     const newMetrics: MetricsType = { overall: { totalProducts: 0, totalValue: 0, averagePrice: 0 } };
     
-    MOCK_CATEGORIES.forEach(category => {
+    categories.forEach(category => {
       const categoryProducts = products.filter(p => p.category === category);
       const totalProducts = categoryProducts.reduce((sum, p) => sum + p.stock, 0);
       const totalValue = categoryProducts.reduce((sum, p) => sum + (p.price * p.stock), 0);
@@ -109,8 +72,9 @@ function App() {
     }));
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Are you sure you want to delete this product?')) {
+      await deleteProduct(id);
       setProducts((prev) => prev.filter((p) => p.id !== id));
       setSelectedProducts((prev) => prev.filter((productId) => productId !== id));
     }
@@ -121,25 +85,19 @@ function App() {
     setIsModalOpen(true);
   };
 
-  const handleSave = (productData: Partial<Product>) => {
+  const handleSave = async (productData: Partial<Product>) => {
     const now = new Date();
     if (editingProduct) {
+      const updatedProduct = await updateProduct(editingProduct.id, { ...productData, updatedAt: now });
       setProducts((prev) =>
-        prev.map((p) => (p.id === editingProduct.id ? { 
-          ...p, 
-          ...productData, 
-          updatedAt: now 
-        } : p))
+        prev.map((p) => (p.id === editingProduct.id ? updatedProduct : p))
       );
     } else {
-      const newProduct: Product = {
-        ...productData,
-        id: Date.now().toString(),
-        isAvailable: true,
-        createdAt: now,
-        updatedAt: now,
-      } as Product;
+      const newProduct = await createProduct({ ...productData, createdAt: now, updatedAt: now });
       setProducts((prev) => [...prev, newProduct]);
+      if (!categories.includes(newProduct.category)) {
+        setCategories((prev) => [...prev, newProduct.category]);
+      }
     }
     setIsModalOpen(false);
     setEditingProduct(undefined);
@@ -196,7 +154,7 @@ function App() {
           onCategoriesChange={setSelectedCategories}
           onAvailabilityChange={setAvailability}
           onSearch={() => {}}
-          categories={MOCK_CATEGORIES}
+          categories={categories}
         />
 
         <div className="bg-white rounded-lg shadow p-6">
@@ -352,7 +310,7 @@ function App() {
           }}
           onSave={handleSave}
           product={editingProduct}
-          categories={MOCK_CATEGORIES}
+          categories={categories}
         />
       </div>
     </div>

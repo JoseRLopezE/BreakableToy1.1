@@ -3,9 +3,11 @@ package com.breakabletoy.controller;
 import com.breakabletoy.model.Product;
 import com.breakabletoy.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
@@ -19,22 +21,26 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Long id) {
-        return productService.getProductById(id).orElse(null);
+    public ResponseEntity<Product> getProductById(@PathVariable String id) {
+        Optional<Product> product = productService.getProductById(id);
+        return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public Product createProduct(@RequestBody Product product) {
-        return productService.saveProduct(product);
+        return productService.createProduct(product);
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        return productService.saveProduct(product);
+    public ResponseEntity<Product> updateProduct(@PathVariable String id, @RequestBody Product product) {
+        Optional<Product> updatedProduct = productService.updateProduct(id, product);
+        return updatedProduct.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable String id) {
         productService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
     }
-}
+
+    }
