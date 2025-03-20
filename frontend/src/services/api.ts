@@ -29,3 +29,6 @@ export const markProductOutOfStock = async (id: string): Promise<void> => {
 export const markProductInStock = async (id: string): Promise<void> => {
   await axios.put(`${API_URL}/products/${id}/instock`);
 };
+
+
+//clear/short/conscise
