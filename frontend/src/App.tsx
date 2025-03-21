@@ -102,15 +102,18 @@ function App() {
   };
 
   const handleSelectProduct = async (id: string, checked: boolean) => {
-    const updatedProducts = products.map((product) => {
-      if (product.id === id) {
-        return { ...product, stock: checked ? 0 : 10 };
-      }
-      return product;
+    await fetch(`/api/products/${id}/stock?outOfStock=${checked}`, {
+      method: 'PATCH',
     });
-    setProducts(updatedProducts);
-    setSelectedProducts((prev) => 
-      checked ? [...prev, id] : prev.filter(productId => productId !== id)
+
+    setProducts((prev) =>
+      prev.map((product) =>
+        product.id === id ? { ...product, stock: checked ? 0 : 10 } : product
+      )
+    );
+
+    setSelectedProducts((prev) =>
+      checked ? [...prev, id] : prev.filter((productId) => productId !== id)
     );
   };
 

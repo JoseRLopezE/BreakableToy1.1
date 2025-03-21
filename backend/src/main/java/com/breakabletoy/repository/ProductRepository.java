@@ -18,10 +18,7 @@ public class ProductRepository {
     }
 
     public Product save(Product product) {
-        if (product.getId() == null || product.getId().isEmpty()) {
-            product.setId(UUID.randomUUID().toString()); // Generate a unique ID if not provided
-        }
-        productMap.put(product.getId(), product);
+        productMap.put(product.getId(), product); // Update the product in the map
         return product;
     }
 

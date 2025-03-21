@@ -22,13 +22,10 @@ export const deleteProduct = async (id: string): Promise<void> => {
   await axios.delete(`${API_URL}/${id}`);
 };
 
-export const markProductOutOfStock = async (id: string): Promise<void> => {
-  await axios.post(`${API_URL}/products/${id}/outofstock`);
+// Add this function to update the stock status of a product
+export const updateProductStock = async (id: string, outOfStock: boolean): Promise<Product> => {
+  const response = await axios.patch(`${API_URL}/${id}/stock`, null, {
+    params: { outOfStock },
+  });
+  return response.data;
 };
-
-export const markProductInStock = async (id: string): Promise<void> => {
-  await axios.put(`${API_URL}/products/${id}/instock`);
-};
-
-
-//clear/short/conscise

@@ -1,4 +1,3 @@
-
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from './App';
 import '@testing-library/jest-dom';
@@ -36,6 +35,22 @@ describe('App', () => {
     expect(screen.getByText('New Product')).toBeInTheDocument();
   });
 
+  it('prevents negative values for price and stock', async () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByText('New Product'));
+
+    // Try entering a negative price
+    const priceInput = screen.getByLabelText('Price');
+    fireEvent.change(priceInput, { target: { value: '-10' } });
+    expect(priceInput).toHaveValue(0); // Should reset to 0
+
+    // Try entering a negative stock
+    const stockInput = screen.getByLabelText('Stock');
+    fireEvent.change(stockInput, { target: { value: '-5' } });
+    expect(stockInput).toHaveValue(0); // Should reset to 0
+  });
+
   it('deletes a product when the delete button is clicked', async () => {
     (deleteProduct as jest.Mock).mockResolvedValue({});
     render(<App />);
@@ -70,5 +85,15 @@ describe('App', () => {
 
     await waitFor(() => expect(screen.getByText('Phone')).toBeInTheDocument());
     expect(createProduct).toHaveBeenCalled();
+  });
+
+  it('renders the Inventory Manager title', () => {
+    render(<App />);
+    expect(screen.getByText('Inventory Manager')).toBeInTheDocument();
+  });
+
+  it('renders the New Product button', () => {
+    render(<App />);
+    expect(screen.getByText('New Product')).toBeInTheDocument();
   });
 });
