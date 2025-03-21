@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ProductModal } from './ProductModal';
 import '@testing-library/jest-dom';
