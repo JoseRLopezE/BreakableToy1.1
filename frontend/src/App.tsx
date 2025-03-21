@@ -6,12 +6,12 @@ import { Metrics } from './components/Metrics';
 import { getExpirationColor, getStockColor, formatDate } from './utils/dateUtils';
 import { ProductModal } from './components/ProductModal';
 import { getProducts, createProduct, updateProduct, deleteProduct } from './services/api';
-import { INITIAL_CATEGORIES, INITIAL_PRODUCTS } from './utils/initialData';
+import { INITIAL_CATEGORIES, } from './utils/initialData';
 
 const ITEMS_PER_PAGE = 10;
 
 function App() {
-  const [products, setProducts] = useState<Product[]>(INITIAL_PRODUCTS);
+  const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<string[]>(INITIAL_CATEGORIES);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
     calculateMetrics();
-  }, [products]);
+  }, [products, searchTerm, selectedCategories, availability]);
 
   const fetchProducts = async () => {
     const data = await getProducts();
@@ -42,7 +42,7 @@ function App() {
     const newMetrics: MetricsType = { overall: { totalProducts: 0, totalValue: 0, averagePrice: 0 } };
     
     categories.forEach(category => {
-      const categoryProducts = products.filter(p => p.category === category);
+      const categoryProducts = filteredProducts.filter(p => p.category === category);
       const totalProducts = categoryProducts.reduce((sum, p) => sum + p.stock, 0);
       const totalValue = categoryProducts.reduce((sum, p) => sum + (p.price * p.stock), 0);
       
