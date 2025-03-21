@@ -17,7 +17,7 @@ public class ProductTest {
     
     @BeforeEach
     public void setUp() {
-        product = new Product(); // Initialize product object
+        product = new Product(null, null, null, 0, null, 0); // Initialize product object
         logger.info("Setup completed: Initialized product instance for testing.");
     }
 

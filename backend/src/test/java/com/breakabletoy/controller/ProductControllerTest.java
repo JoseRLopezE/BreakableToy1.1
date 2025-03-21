@@ -50,7 +50,7 @@ public class ProductControllerTest {
         // Initialize mocks manually
         MockitoAnnotations.openMocks(this);
 
-        product = new Product();
+        product = new Product(null, null, null, 0, null, 0);
         product.setName("Product 1");
         product.setCategory("Category 1");
         product.setPrice(10.0);

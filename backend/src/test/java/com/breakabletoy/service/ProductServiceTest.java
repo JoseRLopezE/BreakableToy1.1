@@ -34,7 +34,7 @@ public class ProductServiceTest {
         // Initialize mocks manually
         MockitoAnnotations.openMocks(this);
 
-        product = new Product();
+        product = new Product(null, null, null, 0, null, 0);
         product.setName("Product 1");
         product.setCategory("Category 1");
         product.setPrice(10.0);
@@ -52,7 +52,7 @@ public class ProductServiceTest {
         logger.info("Running testCreateProduct...");
 
         // Arrange
-        Product product2 = new Product();
+        Product product2 = new Product(null, null, null, 0, null, 0);
         product2.setName("Product 2");
         product2.setCategory("Category 2");
         product2.setPrice(10.0);
@@ -95,7 +95,7 @@ public class ProductServiceTest {
     public void testUpdateProduct() {
         logger.info("testUpdateProduct - Initial product with ID: {}, name: {}, category:{}", product.getId(), product.getName(), product.getCategory());
         // Arrange
-        Product updatedProduct = new Product();
+        Product updatedProduct = new Product(null, null, null, 0, null, 0);
         updatedProduct.setId(product.getId());  // Use the same ID as the original product
         updatedProduct.setName("Updated Product");  // New values for the updated product
         updatedProduct.setCategory("Updated Category");

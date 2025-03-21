@@ -24,7 +24,7 @@ public class ProductRepositoryTest {
     @BeforeEach
     public void setUp() {
         productRepository = new ProductRepository();
-        product = new Product();
+        product = new Product(null, null, null, 0, null, 0);
         product.setId("1");
         product.setName("Product 1");
         product.setCategory("Category 1");
