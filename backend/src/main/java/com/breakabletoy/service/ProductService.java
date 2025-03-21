@@ -14,10 +14,7 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    /**
-     * Retrieves all products from the repository.
-     * @return a list of all products.
-     */
+    
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
@@ -62,13 +59,7 @@ public class ProductService {
         });
     }
 
-    /**
-     * Updates the stock of a product by its ID.
-     * Sets stock to 0 if outOfStock is true, otherwise sets it to 10.
-     * @param id the ID of the product to update.
-     * @param outOfStock whether the product is out of stock.
-     * @return an Optional containing the updated product if successful, or empty if the product was not found.
-     */
+  
     public Optional<Product> updateStock(String id, boolean outOfStock) {
         return productRepository.findById(id).map(product -> {
             product.setStock(outOfStock ? 0 : 10); // Set stock to 0 if checked, 10 if unchecked
@@ -76,11 +67,7 @@ public class ProductService {
         });
     }
 
-    /**
-     * Deletes a product by its ID.
-     * TODO: Add error handling for cases where the product does not exist.
-     * @param id the ID of the product to delete.
-     */
+   
     public void deleteProduct(String id) {
         productRepository.deleteById(id);  // Potential improvement: check if the product exists before deleting
     }
