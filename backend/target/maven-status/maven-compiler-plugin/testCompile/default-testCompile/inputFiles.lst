@@ -1,1 +1,5 @@
 /Users/ramon.lopez/Documents/BreakableToy/backend/src/test/java/com/breakabletoy/AppTest.java
+/Users/ramon.lopez/Documents/BreakableToy/backend/src/test/java/com/breakabletoy/controller/ProductControllerTest.java
+/Users/ramon.lopez/Documents/BreakableToy/backend/src/test/java/com/breakabletoy/model/ProductTest.java
+/Users/ramon.lopez/Documents/BreakableToy/backend/src/test/java/com/breakabletoy/repository/ProductRepositoryTest.java
+/Users/ramon.lopez/Documents/BreakableToy/backend/src/test/java/com/breakabletoy/service/ProductServiceTest.java

@@ -1,4 +1,5 @@
 /Users/ramon.lopez/Documents/BreakableToy/backend/src/main/java/com/breakabletoy/Application.java
+/Users/ramon.lopez/Documents/BreakableToy/backend/src/main/java/com/breakabletoy/config/DataInitializer.java
 /Users/ramon.lopez/Documents/BreakableToy/backend/src/main/java/com/breakabletoy/config/WebConfig.java
 /Users/ramon.lopez/Documents/BreakableToy/backend/src/main/java/com/breakabletoy/controller/ProductController.java
 /Users/ramon.lopez/Documents/BreakableToy/backend/src/main/java/com/breakabletoy/model/Product.java

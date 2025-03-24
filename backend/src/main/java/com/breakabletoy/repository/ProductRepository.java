@@ -18,7 +18,7 @@ public class ProductRepository {
     }
 
     public Product save(Product product) {
-        productMap.put(product.getId(), product);
+        productMap.put(product.getId(), product); // Update the product in the map
         return product;
     }
 

@@ -8,6 +8,16 @@ public class Product {
     private int stock;
     private String expirationDate;
 
+
+    public Product(String id, String name, String category, double price, String expirationDate, int stock) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.expirationDate = expirationDate;
+        this.stock = stock;
+    }
+
     // Getters and Setters
     public String getId() {
         return id;

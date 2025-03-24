@@ -97,7 +97,9 @@ export function ProductModal({ isOpen, onClose, onSave, product, categories }: P
               type="number"
               required
               value={formData.price}
-              onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) })}
+              onChange={(e) =>
+                setFormData({ ...formData, price: Math.max(0, parseFloat(e.target.value) || 0) })
+              }
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
@@ -116,7 +118,9 @@ export function ProductModal({ isOpen, onClose, onSave, product, categories }: P
               type="number"
               required
               value={formData.stock}
-              onChange={(e) => setFormData({ ...formData, stock: parseInt(e.target.value) })}
+              onChange={(e) =>
+                setFormData({ ...formData, stock: Math.max(0, parseInt(e.target.value) || 0) })
+              }
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             />
           </div>
